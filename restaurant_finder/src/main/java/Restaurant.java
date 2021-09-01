@@ -65,4 +65,11 @@ public class Restaurant {
         return name;
     }
 
+    public List<Item> getMenuItem(String... menuItems) {
+        List<Item> selectedItems = new ArrayList<>();
+        for (String item : menuItems) {
+            selectedItems.add(findItemByName(item));
+        }
+        return selectedItems;
+    }
 }
