@@ -5,6 +5,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -84,4 +85,37 @@ class RestaurantTest {
                 () -> restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+    //<<<<<<<<<<<<<<<<<<<<<<<ORDER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    @Test
+    public void when_add_one_menu_item_sweet_corn_soup_order_price_would_be_199() {
+        List<Item> items = restaurant.getMenuItem("Sweet corn soup");
+
+        int orderPrice = items.stream().mapToInt(o -> o.getPrice()).sum();
+
+        assertEquals(Integer.valueOf(119), orderPrice);
+
+    }
+
+    @Test
+    public void when_add_b_menu_item_sweet_corn_soup_and_vegetable_lasagne_order_price_338() {
+        List<Item> items = restaurant.getMenuItem("Sweet corn soup", "Vegetable lasagne");
+        int orderPrice = items.stream().mapToInt(o -> o.getPrice()).sum();
+
+        assertEquals(Integer.valueOf(388), orderPrice);
+    }
+
+    @Test
+    public void when_add_all_menu_item_order_price_338() {
+        List<Item> items = restaurant.getMenuItem("Sweet corn soup", "Vegetable lasagne");
+        int orderPrice = items.stream().mapToInt(o -> o.getPrice()).sum();
+
+        assertEquals(Integer.valueOf(388), orderPrice);
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<ORDER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
 }
